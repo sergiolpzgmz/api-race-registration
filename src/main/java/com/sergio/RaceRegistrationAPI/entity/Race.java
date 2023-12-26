@@ -1,6 +1,7 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -9,25 +10,26 @@ import java.util.Date;
 public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer raceID;
     @Column(name = "race_name", nullable = false, length = 100)
     private String raceName;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Column(name = "race_date", nullable = false)
-    private Date raceDate;
+    private java.sql.Date raceDate;
     @Column(name = "race_location", nullable = false, length = 60)
     private String raceLocation;
 
     @Column(name = "race_regulation", nullable = false)
-    private Integer regulationId;
+    private String regulationId;
 
 
 
     public Integer getId() {
-        return id;
+        return raceID;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.raceID = id;
     }
 
     public String getRaceName() {
@@ -42,7 +44,7 @@ public class Race {
         return raceDate;
     }
 
-    public void setRaceDate(Date raceDate) {
+    public void setRaceDate(java.sql.Date raceDate) {
         this.raceDate = raceDate;
     }
 
@@ -54,11 +56,11 @@ public class Race {
         this.raceLocation = raceLocation;
     }
 
-    public Integer getRegulationId() {
+    public String getRegulationId() {
         return regulationId;
     }
 
-    public void setRegulationId(Integer regulationId) {
+    public void setRegulationId(String regulationId) {
         this.regulationId = regulationId;
     }
 }
