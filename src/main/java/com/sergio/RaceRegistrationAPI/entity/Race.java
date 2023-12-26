@@ -12,11 +12,14 @@ public class Race {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Integer raceID;
+
     @Column(name = "name", nullable = false, length = 100)
     private String raceName;
+
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "date", nullable = false)
     private java.sql.Date raceDate;
+
     @Column(name = "location", nullable = false, length = 60)
     private String raceLocation;
 

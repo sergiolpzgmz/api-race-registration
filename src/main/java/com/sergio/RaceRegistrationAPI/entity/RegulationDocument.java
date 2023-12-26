@@ -9,8 +9,10 @@ public class RegulationDocument {
     @GeneratedValue
     @Column(name = "id", nullable = false, length = 20)
     private String regulationID;
+
     @Column(name = "name", nullable = false, length = 80)
     private String regulationName;
+
     @Lob
     @Column(name = "document", nullable = false, length = 80)
     private byte[] regulationDocument;
