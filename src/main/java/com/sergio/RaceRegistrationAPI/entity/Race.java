@@ -3,33 +3,33 @@ package com.sergio.RaceRegistrationAPI.entity;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "race")
 public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer raceID;
-    @Column(name = "race_name", nullable = false, length = 100)
+    @Column(name = "name", nullable = false, length = 100)
     private String raceName;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "race_date", nullable = false)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(name = "date", nullable = false)
     private java.sql.Date raceDate;
-    @Column(name = "race_location", nullable = false, length = 60)
+    @Column(name = "location", nullable = false, length = 60)
     private String raceLocation;
 
-    @Column(name = "race_regulation", nullable = false)
-    private String regulationId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "regulation_id", nullable = false)
+    private RegulationDocument regulationDocument;
 
-
-
-    public Integer getId() {
+    public Integer getRaceID() {
         return raceID;
     }
 
-    public void setId(Integer id) {
-        this.raceID = id;
+    public void setRaceID(Integer raceID) {
+        this.raceID = raceID;
     }
 
     public String getRaceName() {
@@ -44,7 +44,7 @@ public class Race {
         return raceDate;
     }
 
-    public void setRaceDate(java.sql.Date raceDate) {
+    public void setRaceDate(Date raceDate) {
         this.raceDate = raceDate;
     }
 
@@ -56,11 +56,11 @@ public class Race {
         this.raceLocation = raceLocation;
     }
 
-    public String getRegulationId() {
-        return regulationId;
+    public RegulationDocument getRegulationDocument() {
+        return regulationDocument;
     }
 
-    public void setRegulationId(String regulationId) {
-        this.regulationId = regulationId;
+    public void setRegulationDocument(RegulationDocument regulationDocument) {
+        this.regulationDocument = regulationDocument;
     }
 }

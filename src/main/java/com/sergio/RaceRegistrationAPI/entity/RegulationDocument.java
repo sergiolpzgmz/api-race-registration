@@ -4,15 +4,15 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "regulation_document")
-public class regulationDocument {
+public class RegulationDocument {
     @Id
     @GeneratedValue
-    @Column(name = "regulation_id", nullable = false, length = 20)
+    @Column(name = "id", nullable = false, length = 20)
     private String regulationID;
-    @Column(name = "regulation_name", nullable = false, length = 80)
+    @Column(name = "name", nullable = false, length = 80)
     private String regulationName;
     @Lob
-    @Column(name = "regulation_document", nullable = false, length = 80)
+    @Column(name = "document", nullable = false, length = 80)
     private byte[] regulationDocument;
 
     public String getRegulationID() {
