@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "race")
@@ -26,6 +27,9 @@ public class Race {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "regulation_id", nullable = false)
     private RegulationDocument regulationDocument;
+
+    @OneToMany(mappedBy = "race")
+    private Set<Inscription> inscriptions;
 
     public Integer getRaceID() {
         return raceID;
@@ -65,5 +69,13 @@ public class Race {
 
     public void setRegulationDocument(RegulationDocument regulationDocument) {
         this.regulationDocument = regulationDocument;
+    }
+
+    public Set<Inscription> getInscriptions() {
+        return inscriptions;
+    }
+
+    public void setInscriptions(Set<Inscription> inscriptions) {
+        this.inscriptions = inscriptions;
     }
 }
