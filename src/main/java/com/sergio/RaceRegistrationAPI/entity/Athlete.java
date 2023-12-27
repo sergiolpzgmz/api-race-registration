@@ -8,12 +8,9 @@ import java.util.Set;
 @Table(name = "athlete")
 public class Athlete {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "dorsal", nullable = false)
-    private Long dorsal;
 
     @Column(name = "name", nullable = false, length = 80)
     private String name;
@@ -26,10 +23,6 @@ public class Athlete {
 
     @Column(name = "gender", length = 60)
     private String gender;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_name", nullable = false)
-    private Category category;
 
     @Column(name = "club_name", length = 80)
     private String clubName;
@@ -46,14 +39,6 @@ public class Athlete {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getDorsal() {
-        return dorsal;
-    }
-
-    public void setDorsal(Long dorsal) {
-        this.dorsal = dorsal;
     }
 
     public String getName() {
@@ -86,14 +71,6 @@ public class Athlete {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public String getClubName() {

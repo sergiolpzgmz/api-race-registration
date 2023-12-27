@@ -14,7 +14,7 @@ public class RegulationDocument {
     private String regulationName;
 
     @Lob
-    @Column(name = "document", nullable = false, length = 80)
+    @Column(name = "document", nullable = false, columnDefinition = "LONGBLOB")
     private byte[] regulationDocument;
 
     public String getRegulationID() {

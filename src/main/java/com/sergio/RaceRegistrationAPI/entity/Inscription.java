@@ -1,6 +1,7 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 import java.util.List;
@@ -18,8 +19,17 @@ public class Inscription {
     @JoinColumn(name = "athlete_id")
     private Athlete athlete;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "inscription_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
+    @CreationTimestamp
     private Date inscriptionDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_name", nullable = false)
+    private Category categoryName;
+
+    @Column(name = "dorsal", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long dorsal;
 
     public Race getRace() {
         return race;
@@ -43,5 +53,21 @@ public class Inscription {
 
     public void setInscriptionDate(Date inscriptionDate) {
         this.inscriptionDate = inscriptionDate;
+    }
+
+    public Category getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(Category categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Long getDorsal() {
+        return dorsal;
+    }
+
+    public void setDorsal(Long dorsal) {
+        this.dorsal = dorsal;
     }
 }
