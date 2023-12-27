@@ -14,3 +14,7 @@ As a user:
 - View available races
 - View registered athletes and their basic information
 - Register for a race
+
+# Database design
+
+# Architecture

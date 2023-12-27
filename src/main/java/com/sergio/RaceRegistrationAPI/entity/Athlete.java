@@ -27,8 +27,6 @@ public class Athlete {
     @Column(name = "club_name", length = 80)
     private String clubName;
 
-    @Column(name = "registration_status")
-    private boolean registrationStatus;
 
     @OneToMany(mappedBy = "athlete")
     private Set<Inscription> inscriptions;
@@ -79,14 +77,6 @@ public class Athlete {
 
     public void setClubName(String clubName) {
         this.clubName = clubName;
-    }
-
-    public boolean isRegistrationStatus() {
-        return registrationStatus;
-    }
-
-    public void setRegistrationStatus(boolean registrationStatus) {
-        this.registrationStatus = registrationStatus;
     }
 
     public Set<Inscription> getInscriptions() {
