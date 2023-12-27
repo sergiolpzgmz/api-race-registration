@@ -17,4 +17,12 @@ As a user:
 
 # Database design
 
+<div class="container">
+        <img src="https://github.com/sergiolpzgmz/api-race-registration/blob/master/docs/diagrama.png" alt="UML" width="600em">
+</div>
+
 # Architecture
+
+<div class="container">
+        <img src="https://github.com/sergiolpzgmz/api-race-registration/blob/master/docs/architecture.png" alt="UML" width="600em">
+</div>
