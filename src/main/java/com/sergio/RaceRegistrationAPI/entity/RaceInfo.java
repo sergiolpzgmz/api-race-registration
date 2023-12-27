@@ -16,8 +16,6 @@ public class RaceInfo {
     @Column(name = "general_info", columnDefinition = "TEXT", nullable = false)
     private String generalInfo;
 
-    @Column(name = "details", columnDefinition = "TEXT")
-    private String details;
 
     public Race getRace() {
         return race;
@@ -35,11 +33,4 @@ public class RaceInfo {
         this.generalInfo = generalInfo;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
 }
