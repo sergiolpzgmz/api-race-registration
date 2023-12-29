@@ -2,6 +2,8 @@
 # Race registration API
 
 Api rest to manage the registration of athletes in the different races as well as the information and availability of these.
+> [!IMPORTANT]
+> This project is under development.
 
 ## Installation
 
@@ -20,6 +22,34 @@ As a user:
 - View available races
 - View registered athletes and their basic information
 - Register for a race
+
+
+### Examples
+
+* Post:
+  * /api/v1/race
+    ```bash
+    curl -X POST localhost:8080/api/v1/race -H 'Content-Type: application/json' -d '{"raceName":"Boston Marathon","raceDate":"20/5/2024","raceLocation":"Boston, USA","raceType":"Running"}'
+    ```
+* Get:
+  * /api/v1/race
+    ````bash
+    curl localhost:8080/api/v1/races
+    ````
+  * /api/v1/race/1 
+    ````bash
+    curl localhost:8080/api/v1/races/1
+    ````
+* Put:
+  * /api/v1/race/2 
+    ````bash
+    curl -X PUT localhost:8080/api/v1/race/2 -H "Content-Type: application/json" -d '{"raceName":"Boston Marathon","raceDate":"5/5/2024","raceLocation":"unknown","raceType":"Running"}'
+    ````
+* Delete:
+  * /api/v1/race/2
+    ````bash
+    curl -X DELETE localhost:8080/api/v1/race/2
+    ````
 
 ## Database design
 
