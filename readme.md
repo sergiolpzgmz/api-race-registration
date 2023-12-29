@@ -23,6 +23,7 @@ As a user:
 - View registered athletes and their basic information
 - Register for a race
 
+
 ### Examples
 
 * Post:
