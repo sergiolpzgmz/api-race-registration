@@ -2,8 +2,10 @@ package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Indexed;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -24,12 +26,22 @@ public class Race {
     @Column(name = "location", nullable = false, length = 60)
     private String raceLocation;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "regulation_id", nullable = false)
-    private RegulationDocument regulationDocument;
+    @Column(name = "type", nullable = false, length = 60)
+    private String raceType;
 
     @OneToMany(mappedBy = "race")
     private Set<Inscription> inscriptions;
+
+    public Race(String raceName, Date raceDate, String raceLocation, String raceType) {
+        this.raceName = raceName;
+        this.raceDate = raceDate;
+        this.raceLocation = raceLocation;
+        this.raceType = raceType;
+    }
+
+    public Race() {
+    }
+
 
     public Integer getRaceID() {
         return raceID;
@@ -63,19 +75,31 @@ public class Race {
         this.raceLocation = raceLocation;
     }
 
-    public RegulationDocument getRegulationDocument() {
-        return regulationDocument;
-    }
-
-    public void setRegulationDocument(RegulationDocument regulationDocument) {
-        this.regulationDocument = regulationDocument;
-    }
-
     public Set<Inscription> getInscriptions() {
         return inscriptions;
     }
 
     public void setInscriptions(Set<Inscription> inscriptions) {
         this.inscriptions = inscriptions;
+    }
+
+    public String getRaceType() {
+        return raceType;
+    }
+
+    public void setRaceType(String raceType) {
+        this.raceType = raceType;
+    }
+
+    @Override
+    public String toString() {
+        return "Race{" +
+                "raceID=" + raceID +
+                ", raceName='" + raceName + '\'' +
+                ", raceDate=" + raceDate +
+                ", raceLocation='" + raceLocation + '\'' +
+                ", raceType='" + raceType + '\'' +
+                ", inscriptions=" + inscriptions +
+                '}';
     }
 }
