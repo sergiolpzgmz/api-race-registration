@@ -14,8 +14,12 @@ public class RegulationDocument {
     private String regulationName;
 
     @Lob
-    @Column(name = "document", nullable = false, columnDefinition = "LONGBLOB")
+    @Column(name = "document", columnDefinition = "LONGBLOB")
     private byte[] regulationDocument;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "race_id", nullable = false)
+    private Race race;
 
     public String getRegulationID() {
         return regulationID;
@@ -39,5 +43,13 @@ public class RegulationDocument {
 
     public void setRegulationDocument(byte[] regulationDocument) {
         this.regulationDocument = regulationDocument;
+    }
+
+    public Race getRace() {
+        return race;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
     }
 }
