@@ -28,17 +28,6 @@ public class ApiExceptionHandler {
     }
 
     /**
-     * Handles ApiRequestExceptionBadRequest and returns a ResponseEntity with a corresponding ApiException.
-     */
-    @ExceptionHandler(value = ApiRequestExceptionBadRequest.class)
-    public ResponseEntity<Object> handleApiBadRequestException(
-            ApiRequestExceptionBadRequest apiRequestExceptionBadRequest, HttpServletRequest httpServletRequest) {
-
-        ApiException apiException = getApiException(apiRequestExceptionBadRequest, httpServletRequest);
-        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
-    }
-
-    /**
      * Handles HttpMessageNotReadableException and returns a ResponseEntity with a body containing error details.
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
