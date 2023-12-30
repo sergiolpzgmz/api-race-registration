@@ -60,13 +60,14 @@ public class RaceController {
     }
 
     @DeleteMapping("race/{id}")
-    public ResponseEntity.BodyBuilder deleteRace(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteRace(@PathVariable Integer id) {
         Race raceToDelete = raceService.findRaceById(id);
         if (raceToDelete == null) {
             throw new ApiRequestExceptionNotFound("Race not found with id: " + id);
+        } else{
+            raceService.deleteRace(raceToDelete);
+            return ResponseEntity.noContent().build();
         }
-        raceService.deleteRace(raceToDelete);
-        return ResponseEntity.status(HttpStatus.ACCEPTED);
     }
 
     @GetMapping("race/{id}")
