@@ -60,6 +60,7 @@ public class RaceDTO {
             return sqlDate;
 
         } catch (ParseException e) {
+            dateString = "";
             throw new RuntimeException(e);
         }
     }
