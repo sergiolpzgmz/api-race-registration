@@ -14,7 +14,7 @@ public class Race {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer raceID;
+    private Long raceID;
 
     @Column(name = "name", nullable = false, length = 100)
     private String raceName;
@@ -43,11 +43,11 @@ public class Race {
     }
 
 
-    public Integer getRaceID() {
+    public Long getRaceID() {
         return raceID;
     }
 
-    public void setRaceID(Integer raceID) {
+    public void setRaceID(Long raceID) {
         this.raceID = raceID;
     }
 

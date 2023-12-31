@@ -24,7 +24,7 @@ public class RaceService {
     }
 
     @Transactional(readOnly = true)
-    public Race findRaceById(Integer id){
+    public Race findRaceById(Long id){
         return raceRepository.findById(id).orElse(null);
     }
 

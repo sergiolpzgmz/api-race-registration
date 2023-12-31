@@ -35,7 +35,7 @@ public class RaceController {
     }
 
     @PutMapping("race/{id}")
-    public ResponseEntity<Race> updateRace(@RequestBody RaceDTO raceDTO, @PathVariable Integer id) {
+    public ResponseEntity<Race> updateRace(@RequestBody RaceDTO raceDTO, @PathVariable Long id) {
         try {
             Race raceToUpdate = raceService.findRaceById(id);
 
@@ -60,7 +60,7 @@ public class RaceController {
     }
 
     @DeleteMapping("race/{id}")
-    public ResponseEntity<Void> deleteRace(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteRace(@PathVariable Long id) {
         Race raceToDelete = raceService.findRaceById(id);
         if (raceToDelete == null) {
             throw new ApiRequestExceptionNotFound("Race not found with id: " + id);
@@ -71,7 +71,7 @@ public class RaceController {
     }
 
     @GetMapping("race/{id}")
-    public ResponseEntity<Race> showRaceById(@PathVariable Integer id) {
+    public ResponseEntity<Race> showRaceById(@PathVariable Long id) {
         Race race = raceService.findRaceById(id);
 
         if (race == null) {
