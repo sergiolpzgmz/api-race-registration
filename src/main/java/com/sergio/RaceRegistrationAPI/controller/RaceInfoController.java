@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class RaceInfoController {
@@ -55,9 +57,9 @@ public class RaceInfoController {
     }
 
     @DeleteMapping("info/{id}")
-    public ResponseEntity<Void>deleteInfo(@PathVariable Long id){
+    public ResponseEntity<Void> deleteInfo(@PathVariable Long id) {
         RaceInfo raceInfoToDelete = raceInfoService.findRaceById(id);
-        if(raceInfoToDelete == null){
+        if (raceInfoToDelete == null) {
             throw new ApiRequestExceptionNotFound("No information available for id: " + id);
         } else {
             raceInfoService.deleteRaceInfo(raceInfoToDelete);
@@ -65,4 +67,12 @@ public class RaceInfoController {
         }
     }
 
+    @GetMapping("info/{id}")
+    public ResponseEntity<RaceInfo> showRaceInfoById(@PathVariable Long id) {
+        RaceInfo raceInfo = raceInfoService.findRaceById(id);
+        if (raceInfo == null) {
+            throw new ApiRequestExceptionNotFound("No information available for id: " + id);
+        }
+        return ResponseEntity.ok(raceInfo);
+    }
 }
