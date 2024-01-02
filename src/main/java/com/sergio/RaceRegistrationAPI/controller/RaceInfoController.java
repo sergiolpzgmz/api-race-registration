@@ -53,4 +53,16 @@ public class RaceInfoController {
             throw new DataIntegrityViolationException(e.getMessage());
         }
     }
+
+    @DeleteMapping("info/{id}")
+    public ResponseEntity<Void>deleteInfo(@PathVariable Long id){
+        RaceInfo raceInfoToDelete = raceInfoService.findRaceById(id);
+        if(raceInfoToDelete == null){
+            throw new ApiRequestExceptionNotFound("No information available for id: " + id);
+        } else {
+            raceInfoService.deleteRaceInfo(raceInfoToDelete);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 }
