@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "regulation_document")
 public class RegulationDocument {
     @Id
-    @GeneratedValue
-    @Column(name = "id", nullable = false, length = 20)
+    @Column(name = "id", nullable = false, unique = true, length = 20)
     private String regulationID;
 
     @Column(name = "name", nullable = false, length = 80)
@@ -20,6 +19,16 @@ public class RegulationDocument {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
+
+    public RegulationDocument() {
+    }
+
+    public RegulationDocument(String regulationID, String regulationName, byte[] regulationDocument, Race race) {
+        this.regulationID = regulationID;
+        this.regulationName = regulationName;
+        this.regulationDocument = regulationDocument;
+        this.race = race;
+    }
 
     public String getRegulationID() {
         return regulationID;

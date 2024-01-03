@@ -1,9 +1,6 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-
-import java.util.List;
 
 @Entity
 @Table(name = "race_info")
