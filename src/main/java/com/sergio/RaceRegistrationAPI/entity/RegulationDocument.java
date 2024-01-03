@@ -2,6 +2,8 @@ package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
 @Table(name = "regulation_document")
 public class RegulationDocument {
@@ -28,6 +30,12 @@ public class RegulationDocument {
         this.regulationName = regulationName;
         this.regulationDocument = regulationDocument;
         this.race = race;
+    }
+
+    public RegulationDocument(String regulationID, String regulationName, byte[] regulationDocument) {
+        this.regulationID = regulationID;
+        this.regulationName = regulationName;
+        this.regulationDocument = regulationDocument;
     }
 
     public String getRegulationID() {
@@ -61,4 +69,5 @@ public class RegulationDocument {
     public void setRace(Race race) {
         this.race = race;
     }
+
 }

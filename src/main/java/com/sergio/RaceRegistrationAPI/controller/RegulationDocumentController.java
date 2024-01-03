@@ -57,4 +57,25 @@ public class RegulationDocumentController {
             throw new DataIntegrityViolationException(e.getMessage());
         }
     }
+
+    @DeleteMapping("regulation/{id}")
+    public ResponseEntity<Void>deleteRegulation(@PathVariable String id) {
+        RegulationDocument regulationDocumentToFind = regulationDocumentService.findRegulationDocumentById(id);
+        if(regulationDocumentToFind == null) {
+            throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);
+        } else {
+            RegulationDocument regulationDocumentToDelete = new RegulationDocument(regulationDocumentToFind.getRegulationID(), regulationDocumentToFind.getRegulationName(), regulationDocumentToFind.getRegulationDocument());
+            regulationDocumentService.deleteRegulation(regulationDocumentToDelete);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("regulation/{id}")
+    public ResponseEntity<RegulationDocument>showRegulation(@PathVariable String id) {
+        RegulationDocument regulationDocument = regulationDocumentService.findRegulationDocumentById(id);
+        if(regulationDocument == null) {
+            throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);
+        }
+        return ResponseEntity.ok(regulationDocument);
+    }
 }
