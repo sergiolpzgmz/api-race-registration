@@ -7,14 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.util.List;
 @Service
 public class RaceService {
     @Autowired
     RaceRepository raceRepository;
     @Transactional
-    public Race saveRace(Race race){
-        return raceRepository.save(race);
+    public Race saveRace(RaceDTO raceDTO){
+        Race newRace = new Race(raceDTO.getRaceName(), (Date) raceDTO.getRaceDate(), raceDTO.getRaceLocation(), raceDTO.getRaceType());
+        return raceRepository.save(newRace);
+    }
+
+    @Transactional
+    public Race updateRace(RaceDTO raceDTO, Race raceToUpdate){
+        raceToUpdate.setRaceName(raceDTO.getRaceName());
+        raceToUpdate.setRaceDate(raceDTO.getRaceDate());
+        raceToUpdate.setRaceLocation(raceDTO.getRaceLocation());
+        raceToUpdate.setRaceType(raceDTO.getRaceType());
+        return raceRepository.save(raceToUpdate);
     }
 
     @Transactional

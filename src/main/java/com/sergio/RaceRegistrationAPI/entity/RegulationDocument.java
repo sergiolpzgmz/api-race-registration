@@ -2,7 +2,6 @@ package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Arrays;
 
 @Entity
 @Table(name = "regulation_document")

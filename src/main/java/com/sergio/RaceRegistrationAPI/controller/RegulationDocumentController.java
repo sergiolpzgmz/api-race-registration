@@ -25,12 +25,11 @@ public class RegulationDocumentController {
     RaceService raceService;
 
     @PostMapping("regulation")
-    public ResponseEntity<RegulationDocument> newRegulationDocument(@RequestBody RegulationDocumentDTO regulationDocumentDTO) {
+    public ResponseEntity<RegulationDocumentDTO> newRegulationDocument(@RequestBody RegulationDocumentDTO regulationDocumentDTO) {
         try {
             Race race = raceService.findRaceById(regulationDocumentDTO.getRaceId());
-            RegulationDocument newRegulationDocument = new RegulationDocument(regulationDocumentDTO.getRegulationId(), regulationDocumentDTO.getRegulationName(), regulationDocumentDTO.getRegulationDocument(), race);
-            regulationDocumentService.saveRegulation(newRegulationDocument);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newRegulationDocument);
+            regulationDocumentService.saveRegulation(regulationDocumentDTO, race);
+            return ResponseEntity.status(HttpStatus.CREATED).body(regulationDocumentDTO);
 
         } catch (HttpMessageNotReadableException e) {
             throw new HttpMessageNotReadableException(e.getMessage());
@@ -42,14 +41,12 @@ public class RegulationDocumentController {
     @PutMapping("regulation/{id}")
     public ResponseEntity<RegulationDocument> updateRegulationDocument(@RequestBody RegulationDocumentDTO regulationDocumentDTO, @PathVariable String id) {
         try {
-            RegulationDocument regulationDocument = regulationDocumentService.findRegulationDocumentById(id);
-            if (regulationDocument == null) {
+            RegulationDocument regulationDocumentToUpdate = regulationDocumentService.findRegulationDocumentById(id);
+            if (regulationDocumentToUpdate == null) {
                 throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);
             } else {
-                regulationDocument.setRegulationName(regulationDocumentDTO.getRegulationName());
-                regulationDocument.setRegulationDocument(regulationDocumentDTO.getRegulationDocument());
-                regulationDocumentService.saveRegulation(regulationDocument);
-                return ResponseEntity.status(HttpStatus.CREATED).body(regulationDocument);
+                regulationDocumentService.updateRegulation(regulationDocumentDTO, regulationDocumentToUpdate);
+                return ResponseEntity.status(HttpStatus.CREATED).body(regulationDocumentToUpdate);
             }
         } catch (HttpMessageNotReadableException e) {
             throw new HttpMessageNotReadableException(e.getMessage());
@@ -59,9 +56,9 @@ public class RegulationDocumentController {
     }
 
     @DeleteMapping("regulation/{id}")
-    public ResponseEntity<Void>deleteRegulation(@PathVariable String id) {
+    public ResponseEntity<Void> deleteRegulation(@PathVariable String id) {
         RegulationDocument regulationDocumentToFind = regulationDocumentService.findRegulationDocumentById(id);
-        if(regulationDocumentToFind == null) {
+        if (regulationDocumentToFind == null) {
             throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);
         } else {
             RegulationDocument regulationDocumentToDelete = new RegulationDocument(regulationDocumentToFind.getRegulationID(), regulationDocumentToFind.getRegulationName(), regulationDocumentToFind.getRegulationDocument());
@@ -71,9 +68,9 @@ public class RegulationDocumentController {
     }
 
     @GetMapping("regulation/{id}")
-    public ResponseEntity<RegulationDocument>showRegulation(@PathVariable String id) {
+    public ResponseEntity<RegulationDocument> showRegulation(@PathVariable String id) {
         RegulationDocument regulationDocument = regulationDocumentService.findRegulationDocumentById(id);
-        if(regulationDocument == null) {
+        if (regulationDocument == null) {
             throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);
         }
         return ResponseEntity.ok(regulationDocument);

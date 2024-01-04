@@ -1,5 +1,7 @@
 package com.sergio.RaceRegistrationAPI.service;
 
+import com.sergio.RaceRegistrationAPI.dto.RegulationDocumentDTO;
+import com.sergio.RaceRegistrationAPI.entity.Race;
 import com.sergio.RaceRegistrationAPI.entity.RegulationDocument;
 import com.sergio.RaceRegistrationAPI.repository.RegulationDocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +14,16 @@ public class RegulationDocumentService {
     RegulationDocumentRepository regulationDocumentRepository;
 
     @Transactional
-    public RegulationDocument saveRegulation(RegulationDocument regulationDocument) {
-        return regulationDocumentRepository.save(regulationDocument);
+    public RegulationDocument saveRegulation(RegulationDocumentDTO regulationDocumentDTO, Race race) {
+        RegulationDocument newRegulationDocument = new RegulationDocument(regulationDocumentDTO.getRegulationId(), regulationDocumentDTO.getRegulationName(), regulationDocumentDTO.getRegulationDocument(), race);
+        return regulationDocumentRepository.save(newRegulationDocument);
+    }
+
+    @Transactional
+    public RegulationDocument updateRegulation(RegulationDocumentDTO regulationDocumentDTO, RegulationDocument regulationDocumentToUpdate) {
+        regulationDocumentToUpdate.setRegulationName(regulationDocumentDTO.getRegulationName());
+        regulationDocumentToUpdate.setRegulationDocument(regulationDocumentDTO.getRegulationDocument());
+        return regulationDocumentRepository.save(regulationDocumentToUpdate);
     }
 
     @Transactional

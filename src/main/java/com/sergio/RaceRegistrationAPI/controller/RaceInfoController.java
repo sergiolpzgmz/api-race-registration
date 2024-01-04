@@ -24,12 +24,11 @@ public class RaceInfoController {
     RaceService raceService;
 
     @PostMapping("info")
-    public ResponseEntity<RaceInfo> newRaceInfo(@RequestBody RaceInfoDTO raceInfoDTO) {
+    public ResponseEntity<RaceInfoDTO> newRaceInfo(@RequestBody RaceInfoDTO raceInfoDTO) {
         try {
             Race race = raceService.findRaceById(raceInfoDTO.getRace_id());
-            RaceInfo raceInfo = new RaceInfo(race, raceInfoDTO.getGeneralInfo());
-            raceInfoService.saveRaceInfo(raceInfo);
-            return ResponseEntity.status(HttpStatus.CREATED).body(raceInfo);
+            raceInfoService.saveRaceInfo(raceInfoDTO, race);
+            return ResponseEntity.status(HttpStatus.CREATED).body(raceInfoDTO);
 
         } catch (HttpMessageNotReadableException e) {
             throw new HttpMessageNotReadableException(e.getMessage());
@@ -45,8 +44,7 @@ public class RaceInfoController {
             if (raceInfoToUpdate == null) {
                 throw new ApiRequestExceptionNotFound("No information available for id: " + id);
             } else {
-                raceInfoToUpdate.setGeneralInfo(raceInfoDTO.getGeneralInfo());
-                raceInfoService.saveRaceInfo(raceInfoToUpdate);
+                raceInfoService.updateRaceInfo(raceInfoDTO, raceInfoToUpdate);
                 return ResponseEntity.status(HttpStatus.CREATED).body(raceInfoToUpdate);
             }
         } catch (HttpMessageNotReadableException e) {
