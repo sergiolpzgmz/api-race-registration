@@ -21,11 +21,10 @@ public class RaceController {
     RaceService raceService;
 
     @PostMapping("race")
-    public ResponseEntity<Race> newRace(@RequestBody RaceDTO raceDTO) {
+    public ResponseEntity<RaceDTO> newRace(@RequestBody RaceDTO raceDTO) {
         try {
-            Race newRace = new Race(raceDTO.getRaceName(), (Date) raceDTO.getRaceDate(), raceDTO.getRaceLocation(), raceDTO.getRaceType());
-            raceService.saveRace(newRace);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newRace);
+            raceService.saveRace(raceDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(raceDTO);
 
         } catch (HttpMessageNotReadableException e) {
             throw new HttpMessageNotReadableException(e.getMessage());
@@ -38,18 +37,11 @@ public class RaceController {
     public ResponseEntity<Race> updateRace(@RequestBody RaceDTO raceDTO, @PathVariable Long id) {
         try {
             Race raceToUpdate = raceService.findRaceById(id);
-
             if (raceToUpdate == null) {
                 throw new ApiRequestExceptionNotFound("Race not found with id: " + id);
-
             } else {
-                raceToUpdate.setRaceName(raceDTO.getRaceName());
-                raceToUpdate.setRaceDate(raceDTO.getRaceDate());
-                raceToUpdate.setRaceLocation(raceDTO.getRaceLocation());
-                raceToUpdate.setRaceType(raceDTO.getRaceType());
-                raceService.saveRace(raceToUpdate);
+                raceService.updateRace(raceDTO, raceToUpdate);
                 return ResponseEntity.status(HttpStatus.CREATED).body(raceToUpdate);
-
             }
 
         } catch (HttpMessageNotReadableException e) {
@@ -64,7 +56,7 @@ public class RaceController {
         Race raceToDelete = raceService.findRaceById(id);
         if (raceToDelete == null) {
             throw new ApiRequestExceptionNotFound("Race not found with id: " + id);
-        } else{
+        } else {
             raceService.deleteRace(raceToDelete);
             return ResponseEntity.noContent().build();
         }

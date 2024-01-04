@@ -1,5 +1,7 @@
 package com.sergio.RaceRegistrationAPI.service;
 
+import com.sergio.RaceRegistrationAPI.dto.RaceInfoDTO;
+import com.sergio.RaceRegistrationAPI.entity.Race;
 import com.sergio.RaceRegistrationAPI.entity.RaceInfo;
 import com.sergio.RaceRegistrationAPI.repository.RaceInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,15 @@ public class RaceInfoService {
     @Autowired
     RaceInfoRepository raceInfoRepository;
     @Transactional
-    public RaceInfo saveRaceInfo(RaceInfo raceInfo){
+    public RaceInfo saveRaceInfo(RaceInfoDTO raceInfoDTO, Race race){
+        RaceInfo raceInfo = new RaceInfo(race, raceInfoDTO.getGeneralInfo());
         return raceInfoRepository.save(raceInfo);
+    }
+
+    @Transactional
+    public RaceInfo updateRaceInfo(RaceInfoDTO raceInfoDTO, RaceInfo raceInfoToUpdate) {
+        raceInfoToUpdate.setGeneralInfo(raceInfoDTO.getGeneralInfo());
+        return raceInfoRepository.save(raceInfoToUpdate);
     }
 
     @Transactional
