@@ -1,43 +1,27 @@
-package com.sergio.RaceRegistrationAPI.entity;
+package com.sergio.RaceRegistrationAPI.dto;
 
-import jakarta.persistence.*;
-
+import com.sergio.RaceRegistrationAPI.entity.Race;
 import java.sql.Time;
 
-@Entity
-@Table(name = "race_category")
-public class Category {
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "race_id", nullable = false)
-    private Race race;
-
-    @Id
-    @Column(name = "category_name", nullable = false, length = 50)
+public class CategoryDTO {
+    private Long raceId;
     private String categoryName;
-
-    @Column(name = "distance", nullable = false)
     private float distance;
-
-    @Column(name = "start_time", nullable = false)
     private Time startTime;
 
-    public Category() {
-    }
-
-    public Category(Race race, String categoryName, float distance, Time startTime) {
-        this.race = race;
+    public CategoryDTO(Long raceId, String categoryName, float distance, Time startTime) {
+        this.raceId = raceId;
         this.categoryName = categoryName;
         this.distance = distance;
         this.startTime = startTime;
     }
 
-    public Race getRace() {
-        return race;
+    public Long getRaceId() {
+        return raceId;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public void setRaceId(Long raceId) {
+        this.raceId = raceId;
     }
 
     public String getCategoryName() {
