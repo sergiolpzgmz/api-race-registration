@@ -36,7 +36,7 @@ public class CategoryController {
     }
 
     @PutMapping("category/{raceId}/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable long raceId, @PathVariable String id) {
+    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable String id) {
         try {
             Category categoryToUpdate = categoryService.findCategoryById(id);
             if (categoryToUpdate == null) {
