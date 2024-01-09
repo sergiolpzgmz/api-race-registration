@@ -68,7 +68,7 @@ public class RegulationDocumentController {
     }
 
     @GetMapping("regulation/{id}")
-    public ResponseEntity<RegulationDocument> showRegulation(@PathVariable String id) {
+    public ResponseEntity<RegulationDocument> getRegulation(@PathVariable String id) {
         RegulationDocument regulationDocument = regulationDocumentService.findRegulationDocumentById(id);
         if (regulationDocument == null) {
             throw new ApiRequestExceptionNotFound("Regulation not found with id: " + id);

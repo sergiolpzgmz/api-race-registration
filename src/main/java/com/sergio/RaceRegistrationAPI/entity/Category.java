@@ -8,11 +8,15 @@ import java.sql.Time;
 @Table(name = "race_category")
 public class Category {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
+    private Long categoryId;
+
+    @ManyToOne
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
 
-    @Id
     @Column(name = "category_name", nullable = false, length = 50)
     private String categoryName;
 
@@ -21,6 +25,31 @@ public class Category {
 
     @Column(name = "start_time", nullable = false)
     private Time startTime;
+
+    public Category() {
+    }
+
+    public Category(Race race, String categoryName, float distance, Time startTime) {
+        this.race = race;
+        this.categoryName = categoryName;
+        this.distance = distance;
+        this.startTime = startTime;
+    }
+
+    public Category(Long categoryId, String categoryName, float distance, Time startTime) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.distance = distance;
+        this.startTime = startTime;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public Race getRace() {
         return race;

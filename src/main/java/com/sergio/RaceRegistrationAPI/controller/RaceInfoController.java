@@ -13,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/v1/")
 public class RaceInfoController {
@@ -66,7 +64,7 @@ public class RaceInfoController {
     }
 
     @GetMapping("info/{id}")
-    public ResponseEntity<RaceInfo> showRaceInfoById(@PathVariable Long id) {
+    public ResponseEntity<RaceInfo> getRaceInfoById(@PathVariable Long id) {
         RaceInfo raceInfo = raceInfoService.findRaceById(id);
         if (raceInfo == null) {
             throw new ApiRequestExceptionNotFound("No information available for id: " + id);
