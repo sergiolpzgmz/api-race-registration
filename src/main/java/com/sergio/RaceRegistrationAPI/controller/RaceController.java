@@ -61,7 +61,7 @@ public class RaceController {
     }
 
     @GetMapping("race/{id}")
-    public ResponseEntity<Race> showRaceById(@PathVariable Long id) {
+    public ResponseEntity<Race> getRaceById(@PathVariable Long id) {
         Race race = raceService.findRaceById(id);
 
         if (race == null) {
@@ -71,7 +71,7 @@ public class RaceController {
     }
 
     @GetMapping("races")
-    public ResponseEntity<List<Race>> showRaces() {
+    public ResponseEntity<List<Race>> getRaces() {
         List<Race> races = raceService.getAllRaces();
         if (races.isEmpty()) {
             throw new ApiRequestExceptionNotFound("No races found");

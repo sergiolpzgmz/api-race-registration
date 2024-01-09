@@ -64,7 +64,7 @@ public class RaceInfoController {
     }
 
     @GetMapping("info/{id}")
-    public ResponseEntity<RaceInfo> showRaceInfoById(@PathVariable Long id) {
+    public ResponseEntity<RaceInfo> getRaceInfoById(@PathVariable Long id) {
         RaceInfo raceInfo = raceInfoService.findRaceById(id);
         if (raceInfo == null) {
             throw new ApiRequestExceptionNotFound("No information available for id: " + id);

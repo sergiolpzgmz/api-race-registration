@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class CategoryController {
@@ -35,12 +38,13 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("category/{raceId}/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable String id) {
+    @PutMapping("category/{categoryId}")
+    public ResponseEntity<Category> updateCategory(@RequestBody CategoryDTO categoryDTO, @PathVariable Long categoryId) {
         try {
-            Category categoryToUpdate = categoryService.findCategoryById(id);
+            Category categoryToUpdate = categoryService.findCategoryById(categoryId);
+
             if (categoryToUpdate == null) {
-                throw new ApiRequestExceptionNotFound("Category not found with id: " + id);
+                throw new ApiRequestExceptionNotFound("Category not found with id: " + categoryId);
             } else {
                 categoryService.updateCategoryIngo(categoryDTO, categoryToUpdate);
                 return ResponseEntity.status(HttpStatus.CREATED).body(categoryToUpdate);
@@ -51,5 +55,44 @@ public class CategoryController {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(e.getMessage());
         }
+    }
+
+    @DeleteMapping("category/{categoryId}")
+    public ResponseEntity<Void>deleteCategory(@PathVariable Long categoryId){
+        Category categoryToDelete = categoryService.findCategoryById(categoryId);
+        if(categoryToDelete == null){
+            throw new ApiRequestExceptionNotFound("Category not found with id: " + categoryId);
+        } else{
+            categoryService.deleteCategory(categoryToDelete);
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @GetMapping("category/{categoryId}")
+    public ResponseEntity<Category>getCategoryById(@PathVariable Long categoryId){
+        Category category = categoryService.findCategoryById(categoryId);
+
+        if(category == null){
+            throw new ApiRequestExceptionNotFound("Category not found with id: " + categoryId);
+        }
+        return ResponseEntity.ok(category);
+    }
+
+    @GetMapping("categories/byRace/{raceId}")
+    public ResponseEntity<List<Category>>getRaceCategories(@PathVariable Long raceId){
+        Race race = raceService.findRaceById(raceId);
+        List<Category>categories = categoryService.getAllCategories();
+        List<Category>getCategories = new ArrayList<>();
+
+        if(race == null){
+            throw new ApiRequestExceptionNotFound("Race not found with id: " + raceId);
+        }
+
+        for (Category category: categories){
+           if(category.getRace().getRaceID() == race.getRaceID()){
+               getCategories.add(category);
+           }
+        }
+        return ResponseEntity.ok(getCategories);
     }
 }

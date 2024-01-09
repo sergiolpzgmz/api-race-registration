@@ -35,7 +35,7 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Category findCategoryById(String id) {
+    public Category findCategoryById(Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
 

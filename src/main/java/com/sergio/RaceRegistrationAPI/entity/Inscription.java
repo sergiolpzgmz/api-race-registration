@@ -23,8 +23,8 @@ public class Inscription {
     private Date inscriptionDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_name", nullable = false)
-    private Category categoryName;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category categoryId;
 
     @Column(name = "dorsal", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,12 +54,12 @@ public class Inscription {
         this.inscriptionDate = inscriptionDate;
     }
 
-    public Category getCategoryName() {
-        return categoryName;
+    public Category getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(Category categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getDorsal() {
