@@ -40,8 +40,8 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<Category> getRaceCategories(Long raceId) {
+        return categoryRepository.findCategoriesByRaceId(raceId);
     }
 
 }

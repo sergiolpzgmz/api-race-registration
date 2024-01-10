@@ -50,11 +50,9 @@ public class AthleteService {
         return athleteRepository.findByName(name);
     }
 
+
     @Transactional(readOnly = true)
-    public List<Athlete> getAthletesByClubName(String name){
-        return athleteRepository.findByClub(name);
+    public List<Athlete> getAthletesByClubName(String clubName){
+        return athleteRepository.findByClubName(clubName);
     }
-
-
-
 }
