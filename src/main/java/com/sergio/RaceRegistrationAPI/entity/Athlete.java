@@ -30,8 +30,7 @@ public class Athlete {
     public Athlete() {
     }
 
-    public Athlete(Long id, String name, String surnames, String town, String gender, String clubName) {
-        this.id = id;
+    public Athlete(String name, String surnames, String town, String gender, String clubName) {
         this.name = name;
         this.surnames = surnames;
         this.town = town;
@@ -46,9 +45,6 @@ public class Athlete {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

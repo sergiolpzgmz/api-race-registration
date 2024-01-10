@@ -81,6 +81,9 @@ public class CategoryController {
     @GetMapping("categories/byRace/{raceId}")
     public ResponseEntity<List<Category>>getRaceCategories(@PathVariable Long raceId){
         List<Category>getCategories = categoryService.getRaceCategories(raceId);
+        if(getCategories.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No categories found");
+        }
         return ResponseEntity.ok(getCategories);
     }
 }

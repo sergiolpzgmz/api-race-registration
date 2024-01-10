@@ -16,13 +16,12 @@ public class AthleteService {
 
     @Transactional
     public Athlete saveAthlete(AthleteDTO athleteDTO) {
-        Athlete newAthlete = new Athlete(athleteDTO.getId(), athleteDTO.getName(), athleteDTO.getSurnames(), athleteDTO.getTown(), athleteDTO.getGender(), athleteDTO.getClubName());
+        Athlete newAthlete = new Athlete(athleteDTO.getName(), athleteDTO.getSurnames(), athleteDTO.getTown(), athleteDTO.getGender(), athleteDTO.getClubName());
         return athleteRepository.save(newAthlete);
     }
 
     @Transactional
     public Athlete updateAthlete(AthleteDTO athleteDTO, Athlete athleteToUpdate) {
-        athleteToUpdate.setId(athleteDTO.getId());
         athleteToUpdate.setName(athleteDTO.getName());
         athleteToUpdate.setSurnames(athleteDTO.getSurnames());
         athleteToUpdate.setTown(athleteDTO.getTown());
