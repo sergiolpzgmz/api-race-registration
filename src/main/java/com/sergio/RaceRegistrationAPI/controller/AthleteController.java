@@ -47,4 +47,15 @@ public class AthleteController {
             throw new DataIntegrityViolationException(e.getMessage());
         }
     }
+
+    @DeleteMapping("athlete/{id}")
+    public ResponseEntity<Void> deleteAthlete(@PathVariable Long id) {
+        Athlete athleteToDelete = athleteService.findAthleteById(id);
+        if (athleteToDelete == null) {
+            throw new ApiRequestExceptionNotFound("Athlete not found with id: " + id);
+        } else {
+            athleteService.deleteAthlete(athleteToDelete);
+            return ResponseEntity.noContent().build();
+        }
+    }
 }
