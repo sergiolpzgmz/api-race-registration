@@ -3,28 +3,18 @@ package com.sergio.RaceRegistrationAPI.dto;
 import jakarta.persistence.Column;
 
 public class AthleteDTO {
-    private Long id;
     private String name;
     private String surnames;
     private String town;
     private String gender;
     private String clubName;
 
-    public AthleteDTO(Long id, String name, String surnames, String town, String gender, String clubName) {
-        this.id = id;
+    public AthleteDTO(String name, String surnames, String town, String gender, String clubName) {
         this.name = name;
         this.surnames = surnames;
         this.town = town;
         this.gender = gender;
         this.clubName = clubName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
