@@ -80,19 +80,7 @@ public class CategoryController {
 
     @GetMapping("categories/byRace/{raceId}")
     public ResponseEntity<List<Category>>getRaceCategories(@PathVariable Long raceId){
-        Race race = raceService.findRaceById(raceId);
-        List<Category>categories = categoryService.getAllCategories();
-        List<Category>getCategories = new ArrayList<>();
-
-        if(race == null){
-            throw new ApiRequestExceptionNotFound("Race not found with id: " + raceId);
-        }
-
-        for (Category category: categories){
-           if(category.getRace().getRaceID() == race.getRaceID()){
-               getCategories.add(category);
-           }
-        }
+        List<Category>getCategories = categoryService.getRaceCategories(raceId);
         return ResponseEntity.ok(getCategories);
     }
 }
