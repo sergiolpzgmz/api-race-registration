@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/")
 public class AthleteController {
@@ -57,5 +59,41 @@ public class AthleteController {
             athleteService.deleteAthlete(athleteToDelete);
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @GetMapping("athlete/id/{id}")
+    public ResponseEntity<Athlete>getAthleteById(@PathVariable Long id){
+        Athlete athlete = athleteService.findAthleteById(id);
+        if(athlete == null){
+            throw new ApiRequestExceptionNotFound("Athlete not found with id: " + id);
+        }
+        return ResponseEntity.ok(athlete);
+    }
+
+    @GetMapping("athletes")
+    public ResponseEntity<List<Athlete>>getAllAthletes(){
+        List<Athlete>athletes = athleteService.getAllAthletes();
+        if(athletes.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No athletes found");
+        }
+        return ResponseEntity.ok(athletes);
+    }
+
+    @GetMapping("athlete/name/{name}")
+    public ResponseEntity<List<Athlete>>getAthletesByName(@PathVariable String name){
+        List<Athlete>athletes = athleteService.getAthletesByName(name);
+        if(athletes.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No athletes found");
+        }
+        return ResponseEntity.ok(athletes);
+    }
+
+    @GetMapping("athlete/clubName/{clubName}")
+    public ResponseEntity<List<Athlete>>getAthletesByClubName(@PathVariable String clubName){
+        List<Athlete>athletes = athleteService.getAthletesByClubName(clubName);
+        if(athletes.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No athletes found");
+        }
+        return ResponseEntity.ok(athletes);
     }
 }
