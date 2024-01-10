@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "race_inscription")
+@IdClass(InscriptionId.class)
 public class Inscription {
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
@@ -29,6 +30,17 @@ public class Inscription {
     @Column(name = "dorsal", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long dorsal;
+
+    public Inscription() {
+    }
+
+    public Inscription(Race race, Athlete athlete, Date inscriptionDate, Category categoryId, Long dorsal) {
+        this.race = race;
+        this.athlete = athlete;
+        this.inscriptionDate = inscriptionDate;
+        this.categoryId = categoryId;
+        this.dorsal = dorsal;
+    }
 
     public Race getRace() {
         return race;
