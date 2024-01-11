@@ -40,7 +40,9 @@ public class InscriptionController {
             Athlete athlete = athleteService.findAthleteById(inscriptionDTO.getAthleteId());
             Category category = categoryService.findCategoryById(inscriptionDTO.getCategoryId());
 
-            inscriptionService.saveInscription(inscriptionDTO,race, athlete, category);
+            Long lastDorsal = inscriptionService.getLastInsertedDorsal(inscriptionDTO.getRaceId());
+            if(lastDorsal == null) lastDorsal = 0L;
+            inscriptionService.saveInscription(race, athlete, category, lastDorsal);
             return ResponseEntity.status(HttpStatus.CREATED).body(inscriptionDTO);
 
         } catch (HttpMessageNotReadableException e) {

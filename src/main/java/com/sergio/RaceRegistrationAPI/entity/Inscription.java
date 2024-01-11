@@ -1,10 +1,10 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Entity
 @Table(name = "race_inscription")
@@ -37,7 +37,7 @@ public class Inscription {
         this.race = race;
         this.athlete = athlete;
         this.category = category;
-        this.dorsal = dorsal;
+        this.dorsal = generateDorsal(dorsal);
     }
 
     public Inscription() {
@@ -100,5 +100,8 @@ public class Inscription {
                 ", dorsal=" + dorsal +
                 ", inscriptionDate=" + inscriptionDate +
                 '}';
+    }
+    private Long generateDorsal(Long lastDorsal){
+        return lastDorsal+=1;
     }
 }

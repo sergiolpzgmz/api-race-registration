@@ -16,8 +16,13 @@ public class InscriptionService {
     InscriptionRepository inscriptionRepository;
 
     @Transactional
-    public Inscription saveInscription(InscriptionDTO inscriptionDTO, Race race, Athlete athlete, Category category){
-        Inscription inscription = new Inscription(race,athlete,category, inscriptionDTO.getDorsal());
+    public Inscription saveInscription(Race race, Athlete athlete, Category category, Long lastDorsal){
+        Inscription inscription = new Inscription(race,athlete,category, lastDorsal);
         return inscriptionRepository.save(inscription);
+    }
+
+    @Transactional(readOnly = true)
+    public Long getLastInsertedDorsal(Long raceId){
+        return inscriptionRepository.findLastInsertedDorsal(raceId);
     }
 }
