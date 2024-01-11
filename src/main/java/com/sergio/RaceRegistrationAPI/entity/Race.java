@@ -3,10 +3,8 @@ package com.sergio.RaceRegistrationAPI.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Indexed;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
