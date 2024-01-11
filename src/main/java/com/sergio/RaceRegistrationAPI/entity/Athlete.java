@@ -1,5 +1,6 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -27,6 +28,10 @@ public class Athlete {
     @Column(name = "club_name", length = 80)
     private String clubName;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "athlete")
+    private Set<Inscription> inscriptions;
+
     public Athlete() {
     }
 
@@ -37,9 +42,6 @@ public class Athlete {
         this.gender = gender;
         this.clubName = clubName;
     }
-
-    @OneToMany(mappedBy = "athlete")
-    private Set<Inscription> inscriptions;
 
     public Long getId() {
         return id;
@@ -92,5 +94,17 @@ public class Athlete {
 
     public void setInscriptions(Set<Inscription> inscriptions) {
         this.inscriptions = inscriptions;
+    }
+
+    @Override
+    public String toString() {
+        return "Athlete{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surnames='" + surnames + '\'' +
+                ", town='" + town + '\'' +
+                ", gender='" + gender + '\'' +
+                ", clubName='" + clubName + '\'' +
+                '}';
     }
 }

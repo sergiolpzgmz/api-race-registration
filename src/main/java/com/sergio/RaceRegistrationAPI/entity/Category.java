@@ -82,4 +82,14 @@ public class Category {
     public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", distance=" + distance +
+                ", startTime=" + startTime +
+                '}';
+    }
 }
