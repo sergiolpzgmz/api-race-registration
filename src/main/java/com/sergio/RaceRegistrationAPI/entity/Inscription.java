@@ -7,39 +7,44 @@ import java.util.Date;
 
 @Entity
 @Table(name = "race_inscription")
-@IdClass(InscriptionId.class)
 public class Inscription {
     @Id
-    @ManyToOne(cascade = CascadeType.ALL)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "inscription_id")
+    private Long id;
+
+    @ManyToOne
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
 
-    @Id
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "athlete_id")
+    @ManyToOne
+    @JoinColumn(name = "athlete_id", nullable = false)
     private Athlete athlete;
+
+    @OneToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    @Column(name = "dorsal", nullable = false)
+    private Long dorsal;
 
     @Column(name = "inscription_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false, insertable = false, updatable = false)
     @CreationTimestamp
     private Date inscriptionDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category categoryId;
-
-    @Column(name = "dorsal", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long dorsal;
-
-    public Inscription() {
-    }
-
-    public Inscription(Race race, Athlete athlete, Date inscriptionDate, Category categoryId, Long dorsal) {
+    public Inscription(Race race, Athlete athlete, Category category, Long dorsal) {
         this.race = race;
         this.athlete = athlete;
-        this.inscriptionDate = inscriptionDate;
-        this.categoryId = categoryId;
+        this.category = category;
         this.dorsal = dorsal;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Race getRace() {
@@ -58,20 +63,12 @@ public class Inscription {
         this.athlete = athlete;
     }
 
-    public Date getInscriptionDate() {
-        return inscriptionDate;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setInscriptionDate(Date inscriptionDate) {
-        this.inscriptionDate = inscriptionDate;
-    }
-
-    public Category getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Category categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Long getDorsal() {
@@ -80,5 +77,13 @@ public class Inscription {
 
     public void setDorsal(Long dorsal) {
         this.dorsal = dorsal;
+    }
+
+    public Date getInscriptionDate() {
+        return inscriptionDate;
+    }
+
+    public void setInscriptionDate(Date inscriptionDate) {
+        this.inscriptionDate = inscriptionDate;
     }
 }
