@@ -17,11 +17,11 @@ public class Inscription {
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "athlete_id", nullable = false)
     private Athlete athlete;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -37,6 +37,9 @@ public class Inscription {
         this.athlete = athlete;
         this.category = category;
         this.dorsal = dorsal;
+    }
+
+    public Inscription() {
     }
 
     public Long getId() {

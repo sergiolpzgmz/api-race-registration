@@ -27,6 +27,9 @@ public class Athlete {
     @Column(name = "club_name", length = 80)
     private String clubName;
 
+    @OneToMany(mappedBy = "athlete")
+    private Set<Inscription> inscriptions;
+
     public Athlete() {
     }
 
@@ -37,9 +40,6 @@ public class Athlete {
         this.gender = gender;
         this.clubName = clubName;
     }
-
-    @OneToMany(mappedBy = "athlete")
-    private Set<Inscription> inscriptions;
 
     public Long getId() {
         return id;
