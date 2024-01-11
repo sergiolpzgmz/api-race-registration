@@ -1,5 +1,6 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Indexed;
@@ -29,6 +30,7 @@ public class Race {
     @Column(name = "type", nullable = false, length = 60)
     private String raceType;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "race")
     private Set<Inscription> inscriptions;
 
@@ -99,7 +101,6 @@ public class Race {
                 ", raceDate=" + raceDate +
                 ", raceLocation='" + raceLocation + '\'' +
                 ", raceType='" + raceType + '\'' +
-                ", inscriptions=" + inscriptions +
                 '}';
     }
 }

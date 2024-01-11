@@ -63,11 +63,11 @@ public class RaceController {
     @GetMapping("race/{id}")
     public ResponseEntity<Race> getRaceById(@PathVariable Long id) {
         Race race = raceService.findRaceById(id);
-
         if (race == null) {
             throw new ApiRequestExceptionNotFound("Race not found with id: " + id);
         }
         return ResponseEntity.ok(race);
+
     }
 
     @GetMapping("races")

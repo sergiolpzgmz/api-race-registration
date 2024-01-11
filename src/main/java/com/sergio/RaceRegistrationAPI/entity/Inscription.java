@@ -1,5 +1,6 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -88,5 +89,16 @@ public class Inscription {
 
     public void setInscriptionDate(Date inscriptionDate) {
         this.inscriptionDate = inscriptionDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Inscription{" +
+                "id=" + id +
+                ", athlete=" + athlete +
+                ", category=" + category +
+                ", dorsal=" + dorsal +
+                ", inscriptionDate=" + inscriptionDate +
+                '}';
     }
 }

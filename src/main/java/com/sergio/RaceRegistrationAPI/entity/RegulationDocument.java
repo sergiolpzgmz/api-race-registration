@@ -2,6 +2,8 @@ package com.sergio.RaceRegistrationAPI.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 
 @Entity
 @Table(name = "regulation_document")
@@ -69,4 +71,13 @@ public class RegulationDocument {
         this.race = race;
     }
 
+    @Override
+    public String toString() {
+        return "RegulationDocument{" +
+                "regulationID='" + regulationID + '\'' +
+                ", regulationName='" + regulationName + '\'' +
+                ", regulationDocument=" + Arrays.toString(regulationDocument) +
+                ", race=" + race +
+                '}';
+    }
 }

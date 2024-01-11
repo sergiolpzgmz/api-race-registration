@@ -39,4 +39,12 @@ public class RaceInfo {
         this.generalInfo = generalInfo;
     }
 
+    @Override
+    public String toString() {
+        return "RaceInfo{" +
+                "id=" + id +
+                ", race=" + race +
+                ", generalInfo='" + generalInfo + '\'' +
+                '}';
+    }
 }
