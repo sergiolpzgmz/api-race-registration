@@ -3,7 +3,9 @@ package com.sergio.RaceRegistrationAPI.controller;
 import com.sergio.RaceRegistrationAPI.dto.InscriptionDTO;
 import com.sergio.RaceRegistrationAPI.entity.Athlete;
 import com.sergio.RaceRegistrationAPI.entity.Category;
+import com.sergio.RaceRegistrationAPI.entity.Inscription;
 import com.sergio.RaceRegistrationAPI.entity.Race;
+import com.sergio.RaceRegistrationAPI.exception.ApiRequestExceptionNotFound;
 import com.sergio.RaceRegistrationAPI.service.AthleteService;
 import com.sergio.RaceRegistrationAPI.service.CategoryService;
 import com.sergio.RaceRegistrationAPI.service.InscriptionService;
@@ -13,10 +15,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -50,5 +51,24 @@ public class InscriptionController {
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException(e.getMessage());
         }
+    }
+
+    @GetMapping("inscriptions/race/{raceId}")
+    public ResponseEntity<List<Inscription>>getInscriptionsByRace(@PathVariable Long raceId){
+        List<Inscription>inscriptions = inscriptionService.getInscriptionsByRace(raceId);
+        if(inscriptions.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No inscriptions found");
+        }
+        return ResponseEntity.ok(inscriptions);
+    }
+    @GetMapping("inscriptions/race/{raceId}/category/{categoryId}")
+    public ResponseEntity<List<Inscription>>getInscriptionsByRaceAndCategory(@PathVariable Long raceId, @PathVariable Long categoryId){
+
+        List<Inscription>inscriptions = inscriptionService.getInscriptionsByRaceAndCategory(raceId, categoryId);
+        if(inscriptions.isEmpty()){
+            throw new ApiRequestExceptionNotFound("No inscriptions found");
+        }
+        return ResponseEntity.ok(inscriptions);
+
     }
 }

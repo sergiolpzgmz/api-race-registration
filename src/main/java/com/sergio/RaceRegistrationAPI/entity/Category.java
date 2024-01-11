@@ -1,5 +1,6 @@
 package com.sergio.RaceRegistrationAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -13,6 +14,7 @@ public class Category {
     @Column(name = "category_id")
     private Long categoryId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "race_id", nullable = false)
     private Race race;
