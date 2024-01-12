@@ -1,30 +1,32 @@
 
 # Race registration API
-
 Api rest to manage the registration of athletes in the different races as well as the information and availability of these.
+
 > [!IMPORTANT]
 > This project is under development.
+### To do
+- Add authentication.
 
-## Installation
-
-The project is configured to operate on a mysql database called racemanagment.
-If you want to test it locally you can configure the
-src\main\resources\application.properties
-
-## Usage
-
+### Usage
 As administrator:
-- Register a career
-- Modify a career
-- Suspend/delete a career
+- Register a race
+- Modify a race
+- Delete a race
 
 As a user:
 - View available races
 - View registered athletes and their basic information
 - Register for a race
 
-### Documentation
-To see the full documentation type in your browser: localhost:8080/api/v1/api-docs [or click here](localhost:8080/api/v1/api-docs)
+## Installation
+The project is configured to operate on a mysql database called racemanagment.
+If you want to test it locally just need to create a database with this name, 
+the tables and relations will create themselves. By default, the api runs on port 8080, 
+but you can make any configuration you need in src\main\resources\application.properties
+
+## Documentation
+To see the full documentation type in your browser: localhost:8080/api/v1/api-docs 
+[or click here](localhost:8080/api/v1/api-docs) but make sure you are compiling the api first
 
 ### Examples
 
