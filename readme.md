@@ -18,6 +18,7 @@ As a user:
 - View registered athletes and their basic information
 - Register for a race
 
+
 ## Installation
 The project is configured to operate on a mysql database called racemanagment.
 If you want to test it locally just need to create a database with this name, 
@@ -27,6 +28,10 @@ but you can make any configuration you need in src\main\resources\application.pr
 ## Documentation
 To see the full documentation type in your browser: localhost:8080/api/v1/api-docs 
 [or click here](localhost:8080/api/v1/api-docs) but make sure you are compiling the api first
+
+### Documentation
+To see the full documentation, type in your browser: [localhost:8080/api/v1/api-docs](http://localhost:8080/api/v1/api-docs) [or click here](http://localhost:8080/api/v1/api-docs)
+
 
 ### Examples
 
