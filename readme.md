@@ -26,12 +26,8 @@ the tables and relations will create themselves. By default, the api runs on por
 but you can make any configuration you need in src\main\resources\application.properties
 
 ## Documentation
-To see the full documentation type in your browser: localhost:8080/api/v1/api-docs 
-[or click here](localhost:8080/api/v1/api-docs) but make sure you are compiling the api first
-
-### Documentation
-To see the full documentation, type in your browser: [localhost:8080/api/v1/api-docs](http://localhost:8080/api/v1/api-docs) [or click here](http://localhost:8080/api/v1/api-docs)
-
+To see the full documentation type in your browser: [localhost:8080/api/v1/api-docs](http://localhost:8080/api/v1/api-docs) 
+[or click here](http://localhost:8080/api/v1/api-docs) but make sure you are compiling the api first.
 
 ### Examples
 
