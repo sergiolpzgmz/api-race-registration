@@ -23,6 +23,8 @@ As a user:
 - View registered athletes and their basic information
 - Register for a race
 
+### Documentation
+To see the full documentation type in your browser: localhost:8080/api/v1/api-docs [or click here](localhost:8080/api/v1/api-docs)
 
 ### Examples
 
