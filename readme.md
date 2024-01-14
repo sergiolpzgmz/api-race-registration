@@ -2,11 +2,6 @@
 # Race registration API
 Api rest to manage the registration of athletes in the different races as well as the information and availability of these.
 
-> [!IMPORTANT]
-> This project is under development.
-### To do
-- Add authentication.
-
 ### Usage
 As administrator:
 - Register a race
