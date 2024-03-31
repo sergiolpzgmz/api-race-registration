@@ -51,12 +51,6 @@ To see the full documentation type in your browser: [localhost:8080/api/v1/api-d
     curl -X DELETE localhost:8080/api/v1/race/2
     ````
 
-## Database design
-
-<div class="container">
-        <img src="https://github.com/sergiolpzgmz/api-race-registration/blob/master/docs/diagrama.png" alt="UML" width="600em">
-</div>
-
 ## Architecture
 
 <div class="container">
